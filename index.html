@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>kendo 反应训练</title>
+    <link rel="stylesheet" href="css/index.css">
+    <script src="js/main.mjs" type="module"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/vConsole/3.9.0/vconsole.min.js"></script>
+    <script>
+        // init vConsole
+        var vConsole = new VConsole();
+        console.log('Hello world');
+    </script>
+</head>
+<body>
+<div id="app">
+    <el-container>
+        <el-header>
+
+
+        </el-header>
+        <el-main>
+            <el-form :inline="true">
+                <el-form-item label="最小间隔（单位 秒）">
+                    <el-input-number v-model="numMin"></el-input-number>
+                </el-form-item>
+                <el-form-item label="最大间隔（单位 秒）">
+                    <el-input-number v-model="numMax"></el-input-number>
+                </el-form-item>
+                <el-form-item>
+                    <el-switch
+                            v-model="switchValue"
+                            active-text="开"
+                            inactive-text="关"
+                            @change="switchChange"
+                    ></el-switch>
+                </el-form-item>
+            </el-form>
+        </el-main>
+    </el-container>
+</div>
+</body>
+</html>
