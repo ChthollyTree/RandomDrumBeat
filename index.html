@@ -16,24 +16,33 @@
 <div id="app">
     <el-container>
         <el-header>
-
-
+            <el-form :inline="true">
+                <el-form-item>
+                    <h2>反应训练</h2>
+                </el-form-item>
+            <el-form-item>
+                <el-switch
+                        v-model="switchValue"
+                        active-text="开"
+                        inactive-text="关"
+                        @change="switchChange"
+                ></el-switch>
+            </el-form-item>
+                <el-form-item>
+                    当前选择 {{currentBen}} 本,已经完成 {{countBen}} 本 ,剩余 {{currentBen-countBen}} 本
+                </el-form-item>
+            </el-form>
         </el-header>
         <el-main>
-            <el-form :inline="true">
+            <el-form>
                 <el-form-item label="最小间隔（单位 秒）">
                     <el-input-number v-model="numMin"></el-input-number>
                 </el-form-item>
                 <el-form-item label="最大间隔（单位 秒）">
                     <el-input-number v-model="numMax"></el-input-number>
                 </el-form-item>
-                <el-form-item>
-                    <el-switch
-                            v-model="switchValue"
-                            active-text="开"
-                            inactive-text="关"
-                            @change="switchChange"
-                    ></el-switch>
+                <el-form-item label="数量 (单位 本)">
+                    <el-slider size="large" v-model="currentBen" :step="100" show-stops :min="minBen" :max="maxBen"></el-slider>
                 </el-form-item>
             </el-form>
         </el-main>

@@ -16,6 +16,16 @@ const numMin = ref(5);
 
 const numMax = ref(10);
 
+
+// 本数
+const currentBen = ref(10);
+const minBen = ref(0);
+const maxBen = ref(1000);
+
+// 记录已经打过的
+let countBen = ref(0);
+
+
 // 计算 timeOut 的间隔时间
 const timeOut = ref(getRandomInt(numMin.value * 1000, numMax.value * 1000));
 
@@ -45,6 +55,8 @@ const clearTimeOutTask = () => {
 
 // 播放一个 wav 文件
 const playTaiko = () => {
+    // 本数 ++
+    countBen.value = countBen.value + 1;
     taikoAudio.play().then(() => console.log('Playback started'));
 }
 
@@ -59,7 +71,6 @@ const doTask = () => {
 
 }
 
-
 let app = Vue.createApp({
     setup() {
         watchEffect(() => {
@@ -67,7 +78,18 @@ let app = Vue.createApp({
             clearTimeOutTask();
             doTask();
         })
-        return {numMax, numMin, switchValue, switchChange}
+        watchEffect(() => {
+            if (countBen.value === currentBen.value) {
+                countBen.value = 0;
+                switchValue.value = false;
+                // 弹出窗口
+                Element.ElMessageBox.alert('恭喜你 🎉，当前训练已完成 ✅', 'Title', {
+                    confirmButtonText: '确认',
+                })
+
+            }
+        })
+        return {numMax, numMin, switchValue, switchChange, currentBen, minBen, maxBen, countBen}
     },
 });
 
